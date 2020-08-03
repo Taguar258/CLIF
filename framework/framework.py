@@ -28,26 +28,26 @@ class console:
 			for object in self.objects:
 				event_object = object[1]
 				for command in event_object.commands:
-					if command.__name__ == console_command.split(" ")[0]:
+					if command[0] == console_command.split(" ")[0]:
 						parser_exists = False
 						for parser in event_object.parsers:
 							if type(parser[0]) == type([]):
 								for parser_command in parsers[0]:
-									if parser_command[0] == command.__name__:
-										command(parser_command[1](console_command))
+									if parser_command[0] == command[0]:
+										command[1](parser_command[1](console_command))
 										parser_exists = True
 										break
 								if parser_exists:
 									break
 							elif type(parser[0]) == type(""):
-								if parser[0] == command.__name__:
-									command(parser[1](console_command))
+								if parser[0] == command[0]:
+									command[1](parser[1](console_command))
 									parser_exists = True
 									break
 						try:
-							if not parser_exists: command(console_command=str(console_command))
+							if not parser_exists: command[1](console_command=str(console_command))
 						except:
-							command()
+							command[1]()
 
 def module(module, console):
 	new = importlib.import_module(module)
@@ -79,6 +79,9 @@ class event:
 	def event(self, function):
 		self.events.append(function)
 	def command(self, function):
-		self.commands.append(function)
+		self.commands.append([function.__name__, function])
+	def commands(self, lt, function):
+		for name in lt:
+			self.commands.append([name, function])
 	def parser(self, command, function):
 		self.parsers.append([command, function])
