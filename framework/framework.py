@@ -1,3 +1,5 @@
+import importlib
+
 class console:
 	def __init__(self):
 		self.objects = []
@@ -30,6 +32,11 @@ class console:
 							if not parser_exists: command(console_command=str(console_command))
 						except:
 							command()
+
+def module(module, console):
+	new = importlib.import_module(module)
+	new.setup(console)
+	del(new)
 
 def arg(label, comname, com):
 	if len(com.split("%s " % comname)) == 2:
