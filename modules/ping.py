@@ -3,8 +3,13 @@ from framework.framework import arg
 event = event()
 
 class Easy:
-	def __init__(self, console):
-		self.console = console
+	def __init__(selfie, console):
+		global var
+		global self
+		var = console
+		self = selfie
+
+		self.test = "test"
 
 	@event.event
 	def on_start():
@@ -18,10 +23,10 @@ class Easy:
 		return str(" ".join(command.split(" ")[1:]))
 	event.parser("ping", ping_parse)
 
-
 	@event.command
 	def ping2(args):
 		print(args)
+		test = self.test
 
 	def ping2_parse(command):
 		return arg("Enter Text: ", "ping2", command)

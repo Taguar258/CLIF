@@ -1,12 +1,28 @@
 import importlib
 
+class console_read_only(type):
+	def __setattr__(self, name, value):
+		if attr == "objects":
+			raise Exception("Variable cannot be called objects.")
+
 class console:
+	__metaclass__ = console_read_only
 	def __init__(self):
 		self.objects = []
 		self.ps1 = ":: "
 	def add(self, object, event):
 		self.objects.append([object, event])
 	def run(self):
+		for object in self.objects:
+			event_object = object[1]
+			for event in event_object.events:
+				if event.__name__ == "on_start":
+					event()
+			for event in event_object.events:
+				if event.__name__ == "on_ready":
+					event()
+
+
 		while True:
 			console_command = input(self.ps1)
 			for object in self.objects:
@@ -54,6 +70,12 @@ class event:
 		self.events = []
 		self.commands = []
 		self.parsers = []
+
+	def log(self):
+		print("Events:", self.events)
+		print("Commands:", self.commands)
+		print("Parsers:", self.parsers)
+
 	def event(self, function):
 		self.events.append(function)
 	def command(self, function):
