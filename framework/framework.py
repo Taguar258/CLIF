@@ -15,10 +15,10 @@ class console:
 	def run(self):
 		for object in self.objects:
 			event_object = object[1]
-			for event in event_object.events:
+			for event in event_object.event_events:
 				if event.__name__ == "on_start":
 					event()
-			for event in event_object.events:
+			for event in event_object.event_events:
 				if event.__name__ == "on_ready":
 					event()
 
@@ -27,10 +27,10 @@ class console:
 			console_command = input(self.ps1)
 			for object in self.objects:
 				event_object = object[1]
-				for command in event_object.commands:
+				for command in event_object.event_commands:
 					if command[0] == console_command.split(" ")[0]:
 						parser_exists = False
-						for parser in event_object.parsers:
+						for parser in event_object.event_parsers:
 							if type(parser[0]) == type([]):
 								for parser_command in parsers[0]:
 									if parser_command[0] == command[0]:
@@ -67,21 +67,21 @@ def arg(label, comname, com):
 
 class event:
 	def __init__(self):
-		self.events = []
-		self.commands = []
-		self.parsers = []
+		self.event_events = []
+		self.event_commands = []
+		self.event_parsers = []
 
 	def log(self):
-		print("Events:", self.events)
-		print("Commands:", self.commands)
-		print("Parsers:", self.parsers)
-
+		print("Events:", self.event_events)
+		print("Commands:", self.event_commands)
+		print("Parsers:", self.event_parsers)
+		
 	def event(self, function):
-		self.events.append(function)
+		self.event_events.append(function)
 	def command(self, function):
-		self.commands.append([function.__name__, function])
-	def commands(self, lt, function):
+		self.event_commands.append([function.__name__, function])
+	def commands(self, function, lt):
 		for name in lt:
-			self.commands.append([name, function])
+			self.event_commands.append([name, function])
 	def parser(self, command, function):
-		self.parsers.append([command, function])
+		self.event_parsers.append([command, function])
