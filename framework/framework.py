@@ -36,7 +36,11 @@ class console:
 
 
 		while True:
-			console_command = input(self.ps1)
+			try:
+				console_command = input(self.ps1)
+			except:
+				self._run_event("on_interrupt")
+				quit()
 			self._run_event("on_command")
 
 			for object in self.objects:
@@ -62,6 +66,7 @@ class console:
 							if not parser_exists: command[1](console_command=str(console_command))
 						except:
 							command[1]()
+
 
 def module(module, console):
 	new = importlib.import_module(module)
@@ -98,7 +103,7 @@ class event:
 		self.event_commands.append([function.__name__, function])
 	def help(self, function_name, message):
 		if type(function_name) == type([]):
-			self.event_help.append([", ".join(function_name), message])
+			self.event_help.append([str(function_name), message])
 		elif type(function_name) == type(""):
 			self.event_help.append([function_name, message])
 	def commands(self, function, lt):
