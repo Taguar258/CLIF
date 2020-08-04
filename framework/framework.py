@@ -68,17 +68,20 @@ class console:
 							command[1]()
 
 
-def module(module, console):
+def module(module, console, *args):
 	new = importlib.import_module(module)
-	new.setup(console)
+	if len(args) == 0:
+		new.setup(console)
+	else:
+		new.setup(console, args)
 	del(new)
 
 def arg(label, comname, com):
-	if len(com.split("%s " % comname)) == 2:
-		if com.split("%s " % comname)[1] == "":
+	if len(com.split(comname)) == 2:
+		if com.split(comname)[1] == "":
 			zw = input("%s" % label)
 		else:
-			zw = com.split("%s " % comname)[1]
+			zw = com.split(comname)[1]
 			print("%s%s" % (label, zw))
 	else:
 		zw = input("%s" % label)
@@ -89,13 +92,13 @@ class event:
 		self.event_events = []
 		self.event_commands = []
 		self.event_parsers = []
-		self.event_help = []
+		self.help_list = []
 
 	def log(self):
 		print("Events:", self.event_events)
 		print("Commands:", self.event_commands)
 		print("Parsers:", self.event_parsers)
-		print("Help:", self.event_help)
+		print("Help:", self.help_list)
 		
 	def event(self, function):
 		self.event_events.append(function)
@@ -103,11 +106,11 @@ class event:
 		self.event_commands.append([function.__name__, function])
 	def help(self, function_name, message):
 		if type(function_name) == type([]):
-			self.event_help.append([str(function_name), message])
+			self.help_list.append([str(function_name), message])
 		elif type(function_name) == type(""):
-			self.event_help.append([function_name, message])
+			self.help_list.append([function_name, message])
 	def commands(self, function, lt):
 		for name in lt:
 			self.event_commands.append([name, function])
-	def parser(self, command, function):
+	def parser(self, function, command):
 		self.event_parsers.append([command, function])
