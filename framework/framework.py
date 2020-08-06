@@ -10,9 +10,11 @@ class console:
 	def __init__(self):
 		self.objects = []
 		self.ps1 = ":: "
+		self.running = True
 	def add(self, object, event):
 		self.objects.append([object, event])
-
+	def stop(self):
+		self.running = False
 	def _run_event(self, name):
 		if type(name) == type([]):
 			for object in self.objects:
@@ -35,12 +37,12 @@ class console:
 		self._run_event(["on_start", "on_ready"])
 
 
-		while True:
+		while self.running:
 			try:
 				console_command = input(self.ps1)
 			except:
 				self._run_event("on_interrupt")
-				quit()
+				break
 			self._run_event("on_command")
 
 			for object in self.objects:
@@ -86,6 +88,23 @@ def arg(label, comname, com):
 	else:
 		zw = input("%s" % label)
 	return zw
+
+def help(event, splitter):
+		print("\033[1;32;0mHelp:\033[1;32;40m")
+		max_len = 0
+		for help in event.help_list:
+			if type(help[0]) == type([]):
+				if len(", ".join(help[0])) > max_len:
+					max_len = len(", ".join(help[0]))
+			elif type(help[0]) == type(""):
+				if len(help[0]) > max_len:
+					max_len  = len(help[0])
+		for help in event.help_list:
+			if "[" in help[0]:
+				split_help = help[0].strip('][').split(', ')
+				help[0] = (", ".join(split_help[:-1]) + " or " + split_help[-1]).replace("'", "")
+			length = (" " * (max_len - len(help[0])))
+			print("  " + ("%s %s " % (length, splitter)).join(help))
 
 class event:
 	def __init__(self):
