@@ -10,12 +10,16 @@ class console:
 	def __init__(self):
 		self.objects = []
 		self.ps1 = ":: "
+		self.command_split = " "
 		self.running = True
+		self.command_log = []
+		self.debug_command = False
 	def add(self, object, event):
 		self.objects.append([object, event])
 	def stop(self):
 		self.running = False
 	def _run_event(self, name):
+		self.command_log.append(str(name))
 		if type(name) == type([]):
 			for object in self.objects:
 				event_object = object[1]
@@ -34,6 +38,7 @@ class console:
 		self._run_event(name)
 
 	def run(self):
+		self.running = True
 		self._run_event(["on_start", "on_ready"])
 
 
@@ -43,12 +48,19 @@ class console:
 			except:
 				self._run_event("on_interrupt")
 				break
+			if console_command == "" or console_command == " ":
+				continue
+
 			self._run_event("on_command")
+
+			self.command_log.append(str(console_command))
 
 			for object in self.objects:
 				event_object = object[1]
 				for command in event_object.event_commands:
-					if command[0] == console_command.split(" ")[0]:
+					if self.debug_command:
+						print(command[0].replace("_", self.command_split), console_command.split(self.command_split)[0])
+					if command[0].replace("_", self.command_split) == console_command.split(self.command_split)[0]:
 						parser_exists = False
 						for parser in event_object.event_parsers:
 							if type(parser[0]) == type([]):
@@ -65,7 +77,7 @@ class console:
 									parser_exists = True
 									break
 						try:
-							if not parser_exists: command[1](console_command=str(console_command))
+							if not parser_exists: command[1](console_command)
 						except:
 							command[1]()
 
@@ -78,33 +90,36 @@ def module(module, console, *args):
 		new.setup(console, args)
 	del(new)
 
-def arg(label, comname, com):
-	if len(com.split(comname)) == 2:
-		if com.split(comname)[1] == "":
-			zw = input("%s" % label)
-		else:
-			zw = com.split(comname)[1]
-			print("%s%s" % (label, zw))
-	else:
-		zw = input("%s" % label)
-	return zw
+class tools:
+	def __init__(self):
+		pass
 
-def help(event, splitter):
-		print("\033[1;32;0mHelp:\033[1;32;40m")
-		max_len = 0
-		for help in event.help_list:
-			if type(help[0]) == type([]):
-				if len(", ".join(help[0])) > max_len:
-					max_len = len(", ".join(help[0]))
-			elif type(help[0]) == type(""):
-				if len(help[0]) > max_len:
-					max_len  = len(help[0])
-		for help in event.help_list:
-			if "[" in help[0]:
-				split_help = help[0].strip('][').split(', ')
-				help[0] = (", ".join(split_help[:-1]) + " or " + split_help[-1]).replace("'", "")
-			length = (" " * (max_len - len(help[0])))
-			print("  " + ("%s %s " % (length, splitter)).join(help))
+	def arg(self, label, comname, com):
+		if len(com.split(comname)) == 2:
+			if com.split(comname)[1] == "":
+				zw = input("%s" % label)
+			else:
+				zw = com.split(comname)[1]
+				print("%s%s" % (label, zw))
+		else:
+			zw = input("%s" % label)
+		return zw
+
+	def help(self, startline, splitter, event):
+			max_len = 0
+			for help in event.help_list:
+				if type(help[0]) == type([]):
+					if len(", ".join(help[0])) > max_len:
+						max_len = len(", ".join(help[0]))
+				elif type(help[0]) == type(""):
+					if len(help[0]) > max_len:
+						max_len  = len(help[0])
+			for help in event.help_list:
+				if "[" in help[0]:
+					split_help = help[0].strip('][').split(', ')
+					help[0] = (", ".join(split_help[:-1]) + " or " + split_help[-1]).replace("'", "")
+				length = (" " * (max_len - len(help[0])))
+				print(startline + ("%s%s" % (length, splitter)).join(help))
 
 class event:
 	def __init__(self):
@@ -129,7 +144,13 @@ class event:
 		elif type(function_name) == type(""):
 			self.help_list.append([function_name, message])
 	def commands(self, function, lt):
-		for name in lt:
-			self.event_commands.append([name, function])
+		if type(lt) == type([]):
+			for name in lt:
+				self.event_commands.append([name, function])
+		elif type(lt) == type(""):
+			self.event_commands.append([lt, function])
 	def parser(self, function, command):
 		self.event_parsers.append([command, function])
+
+get_tools = tools()
+get_event = event()
