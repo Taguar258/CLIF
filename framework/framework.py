@@ -55,12 +55,16 @@ class console:
 
 			self.command_log.append(str(console_command))
 
+			command_found = False
+
 			for object in self.objects:
 				event_object = object[1]
 				for command in event_object.event_commands:
 					if self.debug_command:
-						print(command[0].replace("_", self.command_split), console_command.split(self.command_split)[0])
-					if command[0].replace("_", self.command_split) == console_command.split(self.command_split)[0]:
+						print(command[0].replace("_", self.command_split), self.command_split.join(console_command.split(self.command_split)[:(1 + (command[0].replace("_", self.command_split).count(self.command_split)))]))
+					if command[0].replace("_", self.command_split) == self.command_split.join(console_command.split(self.command_split)[:(1 + (command[0].replace("_", self.command_split).count(self.command_split)))]):
+						command_found = True
+						self._run_event("on_command_found")
 						parser_exists = False
 						for parser in event_object.event_parsers:
 							if type(parser[0]) == type([]):
@@ -80,6 +84,17 @@ class console:
 							if not parser_exists: command[1](console_command)
 						except:
 							command[1]()
+
+			if not command_found:
+				self.command_log.append(str("on_command_not_found"))
+				for object in self.objects:
+					event_object = object[1]
+					for event in event_object.event_events:
+						if event.__name__ == "on_command_not_found":
+							try:
+								event(console_command)
+							except:
+								event()
 
 
 def module(module, console, *args):
@@ -120,6 +135,13 @@ class tools:
 					help[0] = (", ".join(split_help[:-1]) + " or " + split_help[-1]).replace("'", "")
 				length = (" " * (max_len - len(help[0])))
 				print(startline + ("%s%s" % (length, splitter)).join(help))
+
+	def question(self, question):
+		ans = input(question + " (Y/N) ").lower()
+		if ans == "y":
+			return True
+		else:
+			return False
 
 class event:
 	def __init__(self):
