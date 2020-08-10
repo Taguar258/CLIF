@@ -14,10 +14,13 @@ class console:
 		self.running = True
 		self.command_log = []
 		self.debug_command = False
+		self.run_command = []
 	def add(self, object, event):
 		self.objects.append([object, event])
 	def stop(self):
 		self.running = False
+	def input(self, command, show_print):
+		self.run_command = [command, show_print]
 	def _run_event(self, name):
 		self.command_log.append(str(name))
 		if type(name) == type([]):
@@ -43,11 +46,16 @@ class console:
 
 
 		while self.running:
-			try:
-				console_command = input(self.ps1)
-			except:
-				self._run_event("on_interrupt")
-				break
+			if len(self.run_command) == 2:
+				console_command = str(self.run_command[0])
+				if self.run_command[1]:
+					print(self.ps1 + self.run_command[0])
+			else:
+				try:
+					console_command = input(self.ps1)
+				except:
+					self._run_event("on_interrupt")
+					break
 			if console_command == "" or console_command == " ":
 				continue
 
@@ -121,20 +129,26 @@ class tools:
 		return zw
 
 	def help(self, startline, splitter, event):
-			max_len = 0
-			for help in event.help_list:
-				if type(help[0]) == type([]):
-					if len(", ".join(help[0])) > max_len:
-						max_len = len(", ".join(help[0]))
-				elif type(help[0]) == type(""):
-					if len(help[0]) > max_len:
-						max_len  = len(help[0])
-			for help in event.help_list:
+		if event.help_text_title != "":
+			print(event.help_text_title)
+		max_len = 0
+		for help in event.help_list:
+			if type(help[0]) == type([]):
+				if len(", ".join(help[0])) > max_len:
+					max_len = len(", ".join(help[0]))
+			elif type(help[0]) == type(""):
+				if len(help[0]) > max_len:
+					max_len  = len(help[0])
+		for help in event.help_list:
+			# print(help)
+			if len(help) == 2:
 				if "[" in help[0]:
 					split_help = help[0].strip('][').split(', ')
 					help[0] = (", ".join(split_help[:-1]) + " or " + split_help[-1]).replace("'", "")
 				length = (" " * (max_len - len(help[0])))
 				print(startline + ("%s%s" % (length, splitter)).join(help))
+			elif len(help) == 1:
+				print(help[0])
 
 	def question(self, question):
 		ans = input(question + " (Y/N) ").lower()
@@ -149,6 +163,7 @@ class event:
 		self.event_commands = []
 		self.event_parsers = []
 		self.help_list = []
+		self.help_text_title = ""
 
 	def log(self):
 		print("Events:", self.event_events)
@@ -165,6 +180,10 @@ class event:
 			self.help_list.append([str(function_name), message])
 		elif type(function_name) == type(""):
 			self.help_list.append([function_name, message])
+	def help_title(self, title):
+		self.help_text_title = str(title)
+	def help_comment(self, comment):
+		self.help_list.append([comment])
 	def commands(self, function, lt):
 		if type(lt) == type([]):
 			for name in lt:
