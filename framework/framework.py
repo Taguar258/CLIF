@@ -1,3 +1,5 @@
+# The CLIF Framework has been programmed by Taguar258 and is published under the Mozilla Public License Version 2.0.
+
 import importlib
 
 class console_read_only(type):
