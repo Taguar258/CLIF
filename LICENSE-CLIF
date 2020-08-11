@@ -374,4 +374,10 @@ You may add additional accurate notices of copyright ownership.
 Exhibit B - "Incompatible With Secondary Licenses" Notice
 ---------------------------------------------------------
 
-This LICENCE file ("LICENCE-CLIF") should not be deleted, but you can add your own Licence to this folder under the name of "LICENCE".
+This Licence file ("LICENCE-CLIF") should not be deleted, you may add your own Licence under the file name "LICENCE".
+
+The Licence in the file "LICENCE" will therefore have a higher priority than this Licence ("LICENCE-CLIFF").
+
+This Licence ("LICENCE-CLIFF") will apply to all the code imported from the CLIF framework (Including modifications).
+
+Code or "Modules" that are programmed to work with the CLIF framework will fall under the Licence in the file called "LICENCE".
