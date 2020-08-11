@@ -2,8 +2,6 @@ The code in this repository is based on the CLIF framework: https://github.com/T
 
 The CLIF framework has been programmed and published by Taguar258.
 
-This file ("LICENCE-CLIF") should not be deleted, but you can add your own Licence to this folder.
-
 
 Mozilla Public License Version 2.0
 ==================================
@@ -376,5 +374,4 @@ You may add additional accurate notices of copyright ownership.
 Exhibit B - "Incompatible With Secondary Licenses" Notice
 ---------------------------------------------------------
 
-  This Source Code Form is "Incompatible With Secondary Licenses", as
-  defined by the Mozilla Public License, v. 2.0.
+This LICENCE file ("LICENCE-CLIF") should not be deleted, but you can add your own Licence to this folder under the name of "LICENCE".
