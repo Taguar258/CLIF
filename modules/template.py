@@ -1,4 +1,4 @@
-from framework.framework import event
+from CLIF-Framework.framework import event
 event = event()
 
 class Temp:
