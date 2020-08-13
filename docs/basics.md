@@ -10,7 +10,7 @@ The folder "CLIF-Framework" is basically the source code for the framework but i
 The other folder called modules can be used to store your source code for the interface.
 
 If you open the file "main.py" you will see this:
-```
+```python
 import CLIF_Framework.framework as framework
  
 console = framework.console()
@@ -28,7 +28,7 @@ The main file basically calls the first console/interface which basically loads 
 It is a bit complicated at first but should be clear later on.
 
 You can just keep the file as is and have a view at the file modules/main.py:
-```
+```python
 from CLIF_Framework.framework import event
 event = event()
 
@@ -39,7 +39,7 @@ class Temp:
       self = selfie
       var = console
       
-      self._main()
+      self.main()
    
    def main(self):
       # Put your event help, etc. in here.
@@ -50,3 +50,238 @@ def setup(console):
 ```
 
 Here you can see the basic structure of a "module".
+
+First you will always need to import an event object:
+
+``from CLIF_Framework.framework import event``
+
+Then you will need to set the variable `event` to an instance of this class:
+
+``event = event()``
+
+The event object saves help messages, events and commands you define.
+
+It will then be passed to the console instance wich will collect those information and call the specific definitions of the event object.
+
+Now we create a class wich you can call whatever you want:
+
+```python
+class Temp:
+   def __init__(selfie, console):
+      global self
+      global var
+      self = selfie
+      var = console
+```
+
+The class in this case is called Temp.
+
+To be able to globaly use the important variables we will need a small work around, though it is just a temporary solution.
+
+```python
+def __init__(selfie, console):
+      global self
+      global var
+      self = selfie
+      var = console
+```
+
+As you can see instead of calling the self argument `self` we call it `selfie` to prevent variable conflicts.
+
+We rename the console object to var because it is shorter and we can use it to define variables globaly but mostly you should be able to just use `self` instead.
+
+Now you could create a function for all the stuff you would like to define:
+
+```python
+class Temp:
+	def __init__(selfie, console):
+		global self
+		global var
+		self = selfie
+		var = console
+
+		self.main() # To call the function
+
+	def main(self):
+		# Put your event help, etc. in here.
+		pass
+```
+
+In this main function we will define our menu context using the inbuilt help functions:
+
+```python
+	def main(self):
+		event.help("(1)", "Option number 1.")
+		event.help("(1)", "Option number 1.")
+		event.help_comment("Select an option.")
+```
+
+You will be able to understand them when we run the script for the first time.
+
+Now we will need to show our help message and therefore we will need to import a tool kit for advanced inbuilt functions:
+
+```Python
+from CLIF_Framework.framework import event
+from CLIF-Framework.framework import tools
+event = event()
+tools = tools()
+```
+
+Now lets display our help message:
+
+```python
+def main(self):
+	event.help("(1)", "Option number 1.")
+	event.help("(1)", "Option number 1.")
+	event.help_comment("Select an option.")
+	
+    event.help_title("Menu")
+    tools.help("|-- ", " :: ", event)
+    # tools.help((STR-TO-PUT-IN-FRONT-OF-FIRST-LINE), (STR-TO-SPLIT-VALUES-WITH), (EVENT-OBJECT))
+    # All of it is saved into event.help_list
+```
+It should be farily self explaining.
+
+`tools.help` displays a help message.
+
+Now that we have our menu we will need to grab the user input:
+
+```python
+class Temp:
+	def __init__(selfie, console):
+		...
+
+	def main(self):
+		...
+
+	@event.command # event.command(function) would do the same
+	def one():
+		print("You selected one.")
+
+	@event.command
+	def two(command): # You can get the exact input by adding a first argument
+		print("You selected two.")
+```
+
+The problem with this is that those function will just run when you enter `one`  or `two`  and now `1` or `2`.
+
+Because we want it to be called through a number input we will need a work around:
+
+```python
+class Temp:
+	def __init__(selfie, console):
+		...
+
+	def main(self):
+		...
+		event.commands(self.one, "1") # will only accept 1
+		event.commands(self.two, ["2", "two"]) # Will accept both
+
+	def one(self):
+		print("You selected one.")
+
+	def two(self):
+		print("You selected two.")
+```
+
+Note that `event.command` and `event.commands` are different:
+
+- `event.command` sets the command name based on the function name.
+- `event.commands` sets the command name based on a second argument.
+
+Lets continue with a basic event.
+
+```python
+class Temp:
+	def __init__(selfie, console):
+		...
+
+	def main(self):
+		...
+		event.commands(self.one, "1") # will only accept 1
+		event.commands(self.two, ["2", "two"]) # Will accept both
+
+	def one(self):
+		print("You selected one.")
+
+	def two(self):
+		print("You selected two.")
+	
+    event.event
+    def on_command_not_found(command):
+        print("Selection does not exist.")
+```
+
+There are inbuilt events but you can also create your own events and call them but thats a topic for later.
+
+Now we just need to add the setup function.
+
+It is always the same but necesairy:
+
+```python
+def console(console):
+	console.ps1 = "Number: " # Change as you want
+	console.add(Main(console), event)
+```
+
+Now you got everything you need for a simple menu:
+
+```python
+from CLIF_Framework.framework import event
+from CLIF_Framework.framework import tools
+event = event()
+tools = tools()
+
+class Menu:
+	def __init__(selfie, console):
+		global self
+		global var
+		self = selfie
+		var = console
+		
+		self.main() # To call the function
+
+	def main(self):
+		event.help("(1)", "Option number 1.")
+		event.help("(2)", "Option number 2.")
+		event.help_comment("Select an option.")
+	
+    	event.help_title("Menu")
+    	tools.help("", " :: ", event)
+    	
+    	event.commands(self.one, "1") # will only accept 1
+		event.commands(self.two, ["2", "two"]) # Will accept both
+
+	@event.event
+	def on_command_not_found(command):
+		print("This is not a valid selection, choose something from the list.")
+
+	@event.event
+	def on_command_found():
+		var.stop() # Will stop asking for input
+
+	def one(self):
+		print("You selected one.")
+
+	def two(self):
+		print("You selected two.")
+
+def setup(console):
+	console.add(Menu(console), event)
+```
+
+Just run main.py and your done.
+
+Output:
+
+```
+Menu
+(1) :: Option number 1.
+(2) :: Option number 2.
+Select an option.
+:: d
+This is not a valid selection, choose something from the list.
+:: 1
+You selected one.
+```
+

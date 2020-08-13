@@ -135,12 +135,13 @@ class tools:
 			print(event.help_text_title)
 		max_len = 0
 		for help in event.help_list:
-			if type(help[0]) == type([]):
-				if len(", ".join(help[0])) > max_len:
-					max_len = len(", ".join(help[0]))
-			elif type(help[0]) == type(""):
-				if len(help[0]) > max_len:
-					max_len  = len(help[0])
+			if len(help) == 2:
+				if type(help[0]) == type([]):
+					if len(", ".join(help[0])) > max_len:
+						max_len = len(", ".join(help[0]))
+				elif type(help[0]) == type(""):
+					if len(help[0]) > max_len:
+						max_len  = len(help[0])
 		for help in event.help_list:
 			# print(help)
 			if len(help) == 2:
@@ -195,5 +196,5 @@ class event:
 	def parser(self, function, command):
 		self.event_parsers.append([command, function])
 
-get_tools = tools()
-get_event = event()
+# get_tools = tools()
+# get_event = event()
