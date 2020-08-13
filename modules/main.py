@@ -1,4 +1,4 @@
-from CLIF-Framework.framework import event
+from CLIF_Framework.framework import event
 event = event()
 
 class Temp:
@@ -10,7 +10,7 @@ class Temp:
       
       self._main()
    
-   def main(self):
+   def _main(self):
       # Put your event help, etc. in here.
       pass
 

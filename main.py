@@ -1,4 +1,4 @@
-import CLIF-Framework.framework as framework
+import CLIF_Framework.framework as framework
 
 console = framework.console()
 

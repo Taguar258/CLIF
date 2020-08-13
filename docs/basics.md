@@ -11,7 +11,7 @@ The other folder called modules can be used to store your source code for the in
 
 If you open the file "main.py" you will see this:
 ```
-import CLIF-Framework.framework as framework
+import CLIF_Framework.framework as framework
  
 console = framework.console()
  
@@ -20,7 +20,7 @@ framework.module("modules.main", console)
 console.run()
 ```
 
-The line  `import CLIF-Framework.framework as framework` basically imports the framework it self.
+The line  `import CLIF_Framework.framework as framework` basically imports the framework it self.
 After that, the line `console = framework.console()` sets the variable `console` to the console class which means that the variable `console` defines a new interface.
 The line `framework.module("modules.main", console)` loads your script located under modules/main as a interpreter for the variable `console`.
 The last line `console.run()` tells the interface `console` to start.
@@ -29,7 +29,7 @@ It is a bit complicated at first but should be clear later on.
 
 You can just keep the file as is and have a view at the file modules/main.py:
 ```
-from CLIF-Framework.framework import event
+from CLIF_Framework.framework import event
 event = event()
 
 class Temp:
