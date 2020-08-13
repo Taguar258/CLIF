@@ -136,7 +136,7 @@ def main(self):
 	event.help_comment("Select an option.")
 	
     event.help_title("Menu")
-    tools.help("|-- ", " :: ", event)
+    tools.help("", " :: ", event)
     # tools.help((STR-TO-PUT-IN-FRONT-OF-FIRST-LINE), (STR-TO-SPLIT-VALUES-WITH), (EVENT-OBJECT))
     # All of it is saved into event.help_list
 ```
