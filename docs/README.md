@@ -10,3 +10,5 @@ This tutorial will be a step to step guide and at the end of it, you will be abl
 PS: You should know advanced python.
 
 [Click here to learn CLIF -->](https://github.com/Taguar258/CLIF/blob/master/docs/basics.md)
+
+[View all functions of CLIF -->](https://github.com/Taguar258/CLIF/blob/master/docs/everything.md)
