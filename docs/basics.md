@@ -1,12 +1,12 @@
 Mastering the CLIF framework
 --------------------------------------------------
-We will now start creating our first interface using CLIF, it is going to be a menu eventough CLIF is not directly made for menus and can make very simple menus complex, but it's a good example and perfect for complex ones.
+We will now start creating our first interface using CLIF, it is going to be a menu even tough CLIF is not directly made for menus and can make very simple menus complex, but it's a good example and perfect for complex ones.
 
-**At the beginning of any project you will need to download the CLIF folder and rename it to any project name you want.**
+**At the beginning of any project, you will need to download the CLIF folder and rename it to any project name you want.**
 
 We will then start a new project.
 If you have a look inside your project's folder you will be able to see two folders and one file.
-The folder "CLIF-Framework" is basically the source code for the framework but in most cases you will not needed to modify it.
+The folder "CLIF-Framework" is the source code for the framework but in most cases, you will not need to modify it.
 The other folder called modules can be used to store your source code for the interface.
 
 If you open the file "main.py" you will see this:
@@ -20,11 +20,11 @@ framework.module("modules.main", console)
 console.run()
 ```
 
-The line  `import CLIF_Framework.framework as framework` basically imports the framework it self.
+The line  `import CLIF_Framework.framework as framework` imports the framework itself.
 After that, the line `console = framework.console()` sets the variable `console` to the console class which means that the variable `console` defines a new interface.
-The line `framework.module("modules.main", console)` loads your script located under modules/main as a interpreter for the variable `console`.
+The line `framework.module("modules.main", console)` loads your script located under modules/main as an interpreter for the variable `console`.
 The last line `console.run()` tells the interface `console` to start.
-The main file basically calls the first console/interface which basically loads your script as the logic of the interface.
+The main file calls the first console/interface which loads your script as the logic of the interface.
 It is a bit complicated at first but should be clear later on.
 
 You can just keep the file as is and have a view at the file modules/main.py:
@@ -51,7 +51,7 @@ def setup(console):
 
 Here you can see the basic structure of a "module".
 
-First you will always need to import an event object:
+First, you will always need to import an event object:
 
 ``from CLIF_Framework.framework import event``
 
@@ -59,11 +59,11 @@ Then you will need to set the variable `event` to an instance of this class:
 
 ``event = event()``
 
-The event object saves help messages, events and commands you define.
+The event object saves help messages, events, and commands you define.
 
-It will then be passed to the console instance wich will collect those information and call the specific definitions of the event object.
+It will then be passed to the console instance which will collect that information and call the specific definitions of the event object.
 
-Now we create a class wich you can call whatever you want:
+Now we create a class which you can call whatever you want:
 
 ```python
 class Temp:
@@ -76,7 +76,7 @@ class Temp:
 
 The class in this case is called Temp.
 
-To be able to globaly use the important variables we will need a small work around, though it is just a temporary solution.
+To be able to globally use the important variables we will need a small workaround, though it is just a temporary solution.
 
 ```python
 def __init__(selfie, console):
@@ -88,7 +88,7 @@ def __init__(selfie, console):
 
 As you can see instead of calling the self argument `self` we call it `selfie` to prevent variable conflicts.
 
-We rename the console object to var because it is shorter and we can use it to define variables globaly but mostly you should be able to just use `self` instead.
+We rename the console object to var because it is shorter and we can use it to define variables globally but mostly you should be able to just use `self` instead.
 
 Now you could create a function for all the stuff you would like to define:
 
@@ -163,9 +163,9 @@ class Temp:
 		print("You selected two.")
 ```
 
-The problem with this is that those function will just run when you enter `one`  or `two`  and now `1` or `2`.
+The problem with this is that those functions will just run when you enter `one`  or `two`  and now `1` or `2`.
 
-Because we want it to be called through a number input we will need a work around:
+Because we want it to be called through a number input we will need a workaround:
 
 ```python
 class Temp:
@@ -212,7 +212,7 @@ class Temp:
         print("Selection does not exist.")
 ```
 
-There are inbuilt events but you can also create your own events and call them but thats a topic for later.
+There are inbuilt events but you can also create your own events and call them but that is a topic for later.
 
 Now we just need to add the setup function.
 
