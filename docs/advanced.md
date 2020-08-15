@@ -132,3 +132,4 @@ def setup(console): # Setup function
 	console.add(Main(console), event) # Add the class to the interface
 ```
 
+[View all functions of CLIF -->](https://github.com/Taguar258/CLIF/blob/master/docs/everything.md)
