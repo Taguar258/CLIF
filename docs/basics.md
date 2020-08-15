@@ -285,3 +285,4 @@ This is not a valid selection, choose something from the list.
 You selected one.
 ```
 
+[Click here to view an example -->](https://github.com/Taguar258/CLIF/blob/master/docs/advanced.md)
