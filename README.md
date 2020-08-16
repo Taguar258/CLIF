@@ -41,7 +41,7 @@ def on_command_not_found(command):
   print("Command does not exist.")
 ```
 
-## Documentation and Installation:
+## Documentation:
 
 <a style="color: grey" href="https://github.com/Taguar258/CLIF/blob/master/docs/">Click here for the documentation.</a>
 
