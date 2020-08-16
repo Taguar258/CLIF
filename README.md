@@ -19,6 +19,8 @@ CLIF can be optimized the way you want to make your ideas work.
 ## The difference
 Normaly you would create if statements:
 ```python
+command_input = input(">> ")
+
 if command_input == "command1":
   pass
 elif command_input == "command2":
