@@ -14,6 +14,7 @@ CLIF can be optimized the way you want to make your ideas work.
 - [x] Utilises python decorators.
 - [x] Create events and call them later.
 - [x] Quality over Quantity without thinking about it.
+- [X] No installation required.
 
 ## The difference
 Normaly you would create if statements:
