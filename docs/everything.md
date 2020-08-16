@@ -7,7 +7,7 @@ Here you will find all functions and classes listed below:
 |       Function        |                         Description                          |                            Usage                             |        Type        |
 | :-------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------: |
 |       console()       |               Create a new interface instance.               |                     console = console()                      |       Class        |
-|       module()        |                Add a module to an interface.                 |         module("module_path_split_by_dot", console)          |      Function      |
+|       module()        |                Add a module to an interface.                 |         module("module_path_split_by_dot", console) #Pass additional arguments.         |      Function      |
 |     console.run()     |                Show  and start the interface.                |                        console.run()                         | Function of class  |
 |    console.objects    |                   All modules and events.                    |                             List                             | Variable of class  |
 |      console.ps1      |                         Input text.                          |                  Variable (default: ":: ")                   | Variable of class  |
