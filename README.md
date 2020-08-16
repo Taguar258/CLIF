@@ -15,6 +15,32 @@ CLIF can be optimized the way you want to make your ideas work.
 - [x] Create events and call them later.
 - [x] Quality over Quantity without thinking about it.
 
+## The difference
+Normaly you would create if statements:
+```python
+if command_input == "command1":
+  pass
+elif command_input == "command2":
+  pass
+else:
+  print("Command does not exist.")
+```
+
+What it looks like using CLIF:
+```python
+@event.command
+def command1(command):
+  pass
+
+@event.command
+def command2(command):
+  pass
+
+@event.event
+def on_command_not_found(command):
+  print("Command does not exist.")
+```
+
 ## Documentation and Installation:
 
 <a style="color: grey" href="https://github.com/Taguar258/CLIF/blob/master/docs/">Click here for the documentation.</a>
