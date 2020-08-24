@@ -1,5 +1,5 @@
 # CLIF Framework<br><img src="https://img.shields.io/badge/Language-Python3-blue"><img src="https://img.shields.io/badge/Status-Beta-orange"><img src="https://img.shields.io/badge/Version-1.0-red"><img src="https://img.shields.io/badge/Licence-MIT-yellowgreen">
-**CLIF is a python framework to create interactive command-line interfaces.**
+**CLIF is a python framework for creating interactive command-line interfaces.**
 
 CLIF aims to make code more human-readable.
 
