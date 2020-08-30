@@ -2,7 +2,7 @@ Mastering the CLIF framework
 --------------------------------------------------
 We will now start creating our first interface using CLIF, it is going to be a menu even tough CLIF is not directly made for menus and can make very simple menus complex, but it's a good example and perfect for complex ones.
 
-**At the beginning of any project, you will need to download the CLIF folder and rename it to any project name you want.**
+**At the beginning of any project, you will need to <a href="https://github.com/Taguar258/CLIF/releases/download/1.0/CLIF-Clean.zip">download the CLIF Template</a> and rename it to any project name you want.**
 
 We will then start a new project.
 If you have a look inside your project's folder you will be able to see two folders and one file.
