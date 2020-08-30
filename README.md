@@ -48,6 +48,8 @@ def on_command_not_found(command):
 
 <a style="color: grey" href="https://github.com/Taguar258/CLIF/blob/master/docs/">Click here for the documentation.</a>
 
+<a style="color: grey" href="https://github.com/Taguar258/CLIF/releases/download/1.0/CLIF-Clean.zip">Download Template.</a>
+
 <a style="color: grey" href="https://github.com/Taguar258/CLIF/projects/1">Project status/ToDo</a>
 
 <!--![Preview]()-->
