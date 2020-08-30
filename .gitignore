@@ -1,0 +1,7 @@
+# ignore all files
+*
+
+# but exclude
+!/CLIF-Framework
+!/modules
+!main.py
