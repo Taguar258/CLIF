@@ -61,7 +61,14 @@ class console:
 			if console_command == "" or console_command == " ":
 				continue
 
-			self._run_event("on_command")
+			for object in self.objects:
+					event_object = object[1]
+					for event in event_object.event_events:
+						if event.__name__ == "on_command":
+							try:
+								event(console_command)
+							except:
+								event()
 
 			self.command_log.append(str(console_command))
 
