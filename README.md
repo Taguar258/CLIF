@@ -5,6 +5,8 @@ CLIF aims to make code more human-readable.
 
 CLIF can be optimized the way you want to make your ideas work.
 
+<a href="https://github.com/Taguar258/CLIF#documentation">Download</a>
+
 ## What has been created using CLIF?
 
 <a style="color: grey" href="https://github.com/Taguar258/Raven-Storm/">Raven-Storm</a>
