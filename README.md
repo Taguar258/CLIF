@@ -1,4 +1,4 @@
-# CLIF Framework<br><img src="https://img.shields.io/badge/Language-Python3-blue"><img src="https://img.shields.io/badge/Status-Beta-orange"><img src="https://img.shields.io/badge/Version-1.0-red"><img src="https://img.shields.io/badge/Licence-MIT-yellowgreen">
+# CLIF Framework<br><img src="https://img.shields.io/badge/Language-Python3-blue"><img src="https://img.shields.io/badge/Status-Beta-orange"><img src="https://img.shields.io/badge/Version-1.1-red"><img src="https://img.shields.io/badge/Licence-MIT-yellowgreen">
 **CLIF is a python framework for creating interactive command-line interfaces.**
 
 CLIF aims to make code more human-readable.
@@ -16,7 +16,7 @@ CLIF can be optimized the way you want to make your ideas work.
 - [x] Utilises python decorators.
 - [x] Create events and call them later.
 - [x] Quality over Quantity without thinking about it.
-- [X] No installation is required.
+- [x] No installation is required.
 
 ## The difference
 Normaly you would create if statements:
@@ -46,7 +46,7 @@ def on_command_not_found(command):
   print("Command does not exist.")
 ```
 
-## Documentation:
+## Documentation
 
 <a href="https://github.com/Taguar258/CLIF/blob/master/docs/">Click here for the Documentation.</a>
 
