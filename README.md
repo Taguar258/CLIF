@@ -24,26 +24,26 @@ Normaly you would create if statements:
 command_input = input(">> ")
 
 if command_input == "command1":
-  pass
+    pass
 elif command_input == "command2":
-  pass
+    pass
 else:
-  print("Command does not exist.")
+    print("Command does not exist.")
 ```
 
 What it looks like using CLIF:
 ```python
 @event.command
 def command1(command):
-  pass
+    pass
 
 @event.command
 def command2(command):
-  pass
+    pass
 
 @event.event
 def on_command_not_found(command):
-  print("Command does not exist.")
+    print("Command does not exist.")
 ```
 
 ## Documentation
