@@ -11,12 +11,12 @@ The other folder called modules can be used to store your source code for the in
 
 If you open the file "main.py" you will see this:
 ```python
-import CLIF_Framework.framework as framework
- 
-console = framework.console()
- 
-framework.module("modules.main", console)
- 
+import CLIF_Framework.framework as Framework
+
+console = Framework.console()
+
+Framework.module("modules.main", console)
+
 console.run()
 ```
 
@@ -30,23 +30,26 @@ It is a bit complicated at first but should be clear later on.
 You can just keep the file as is and have a view at the file modules/main.py:
 ```python
 from CLIF_Framework.framework import event
+
 event = event()
 
+
 class Temp:
-   def __init__(selfie, console):
-      global self
-      global var
-      self = selfie
-      var = console
-      
-      self.main()
-   
-   def main(self):
-      # Put your event help, etc. in here.
-      pass
+    def __init__(selfie, console):
+        global self
+        global var
+        self = selfie
+        var = console
+
+        self.main()
+
+    def main(self):
+        # Put your event help, etc. in here.
+        pass
+
 
 def setup(console):
-   console.add(Temp(console), event)
+    console.add(Temp(console), event)
 ```
 
 Here you can see the basic structure of a "module".
@@ -67,11 +70,11 @@ Now we create a class which you can call whatever you want:
 
 ```python
 class Temp:
-   def __init__(selfie, console):
-      global self
-      global var
-      self = selfie
-      var = console
+    def __init__(selfie, console):
+        global self
+        global var
+        self = selfie
+        var = console
 ```
 
 The class in this case is called Temp.
@@ -80,10 +83,10 @@ To be able to globally use the important variables we will need a small workarou
 
 ```python
 def __init__(selfie, console):
-      global self
-      global var
-      self = selfie
-      var = console
+    global self
+    global var
+    self = selfie
+    var = console
 ```
 
 As you can see instead of calling the self argument `self` we call it `selfie` to prevent variable conflicts.
@@ -94,26 +97,26 @@ Now you could create a function for all the stuff you would like to define:
 
 ```python
 class Temp:
-	def __init__(selfie, console):
-		global self
-		global var
-		self = selfie
-		var = console
+    def __init__(selfie, console):
+        global self
+        global var
+        self = selfie
+        var = console
 
-		self.main() # To call the function
+        self.main()  # To call the function
 
-	def main(self):
-		# Put your event help, etc. in here.
-		pass
+    def main(self):
+        # Put your event help, etc. in here.
+        pass
 ```
 
 In this main function we will define our menu context using the inbuilt help functions:
 
 ```python
-	def main(self):
-		event.help("(1)", "Option number 1.")
-		event.help("(1)", "Option number 1.")
-		event.help_comment("Select an option.")
+    def main(self):
+        event.help("(1)", "Option number 1.")
+        event.help("(1)", "Option number 1.")
+        event.help_comment("Select an option.")
 ```
 
 You will be able to understand them when we run the script for the first time.
@@ -131,10 +134,10 @@ Now lets display our help message:
 
 ```python
 def main(self):
-	event.help("(1)", "Option number 1.")
-	event.help("(1)", "Option number 1.")
-	event.help_comment("Select an option.")
-	
+    event.help("(1)", "Option number 1.")
+    event.help("(1)", "Option number 1.")
+    event.help_comment("Select an option.")
+
     event.help_title("Menu")
     tools.help("", " :: ", event)
     # tools.help((STR-TO-PUT-IN-FRONT-OF-FIRST-LINE), (STR-TO-SPLIT-VALUES-WITH), (EVENT-OBJECT))
@@ -148,19 +151,19 @@ Now that we have our menu we will need to grab the user input:
 
 ```python
 class Temp:
-	def __init__(selfie, console):
-		...
+    def __init__(selfie, console):
+        ...
 
-	def main(self):
-		...
+    def main(self):
+        ...
 
-	@event.command # event.command(function) would do the same
-	def one():
-		print("You selected one.")
+    @event.command  # event.command(function) would do the same
+    def one():
+        print("You selected one.")
 
-	@event.command
-	def two(command): # You can get the exact input by adding a first argument
-		print("You selected two.")
+    @event.command
+    def two(command):  # You can get the exact input by adding a first argument
+        print("You selected two.")
 ```
 
 The problem with this is that those functions will just run when you enter `one`  or `two`  and now `1` or `2`.
@@ -169,19 +172,19 @@ Because we want it to be called through a number input we will need a workaround
 
 ```python
 class Temp:
-	def __init__(selfie, console):
-		...
+    def __init__(selfie, console):
+        ...
 
-	def main(self):
-		...
-		event.commands(self.one, "1") # will only accept 1
-		event.commands(self.two, ["2", "two"]) # Will accept both
+    def main(self):
+        ...
+        event.commands(self.one, "1")  # will only accept 1
+        event.commands(self.two, ["2", "two"])  # Will accept both
 
-	def one(self):
-		print("You selected one.")
+    def one(self):
+        print("You selected one.")
 
-	def two(self):
-		print("You selected two.")
+    def two(self):
+        print("You selected two.")
 ```
 
 Note that `event.command` and `event.commands` are different:
@@ -193,20 +196,20 @@ Lets continue with a basic event.
 
 ```python
 class Temp:
-	def __init__(selfie, console):
-		...
+    def __init__(selfie, console):
+        ...
 
-	def main(self):
-		...
-		event.commands(self.one, "1") # will only accept 1
-		event.commands(self.two, ["2", "two"]) # Will accept both
+    def main(self):
+        ...
+        event.commands(self.one, "1")  # will only accept 1
+        event.commands(self.two, ["2", "two"])  # Will accept both
 
-	def one(self):
-		print("You selected one.")
+    def one(self):
+        print("You selected one.")
 
-	def two(self):
-		print("You selected two.")
-	
+    def two(self):
+        print("You selected two.")
+
     event.event
     def on_command_not_found(command):
         print("Selection does not exist.")
@@ -220,8 +223,8 @@ It is always the same but necesairy:
 
 ```python
 def console(console):
-	console.ps1 = "Number: " # Change as you want
-	console.add(Main(console), event)
+    console.ps1 = "Number: "  # Change as you want
+    console.add(Main(console), event)
 ```
 
 Now you got everything you need for a simple menu:
@@ -232,42 +235,44 @@ from CLIF_Framework.framework import tools
 event = event()
 tools = tools()
 
+
 class Menu:
-	def __init__(selfie, console):
-		global self
-		global var
-		self = selfie
-		var = console
-		
-		self.main() # To call the function
+    def __init__(selfie, console):
+        global self
+        global var
+        self = selfie
+        var = console
 
-	def main(self):
-		event.help("(1)", "Option number 1.")
-		event.help("(2)", "Option number 2.")
-		event.help_comment("Select an option.")
-	
-    	event.help_title("Menu")
-    	tools.help("", " :: ", event)
-    	
-    	event.commands(self.one, "1") # will only accept 1
-		event.commands(self.two, ["2", "two"]) # Will accept both
+        self.main()  # To call the function
 
-	@event.event
-	def on_command_not_found(command):
-		print("This is not a valid selection, choose something from the list.")
+    def main(self):
+        event.help("(1)", "Option number 1.")
+        event.help("(2)", "Option number 2.")
+        event.help_comment("Select an option.")
 
-	@event.event
-	def on_command_found():
-		var.stop() # Will stop asking for input
+        event.help_title("Menu")
+        tools.help("", " :: ", event)
 
-	def one(self):
-		print("You selected one.")
+        event.commands(self.one, "1")  # will only accept 1
+        event.commands(self.two, ["2", "two"])  # Will accept both
 
-	def two(self):
-		print("You selected two.")
+    @event.event
+    def on_command_not_found(command):
+        print("This is not a valid selection, choose something from the list.")
+
+    @event.event
+    def on_command_found():
+        var.stop()  # Will stop asking for input
+
+    def one(self):
+        print("You selected one.")
+
+    def two(self):
+        print("You selected two.")
+
 
 def setup(console):
-	console.add(Menu(console), event)
+    console.add(Menu(console), event)
 ```
 
 Just run main.py and your done.
@@ -279,7 +284,7 @@ Menu
 (1) :: Option number 1.
 (2) :: Option number 2.
 Select an option.
-:: d
+:: not_existing
 This is not a valid selection, choose something from the list.
 :: 1
 You selected one.

@@ -1,7 +1,7 @@
-import CLIF_Framework.framework as framework
+import CLIF_Framework.framework as Framework
 
-console = framework.console()
+console = Framework.console()
 
-framework.module("modules.main", console)
+Framework.module("modules.main", console)
 
 console.run()
