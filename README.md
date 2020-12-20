@@ -50,7 +50,7 @@ def on_command_not_found(command):
 
 <a href="https://github.com/Taguar258/CLIF/blob/master/docs/">Click here for the Documentation.</a>
 
-<a href="https://github.com/Taguar258/CLIF/releases/download/1.1/CLIF-Clean.zip">Download Template.</a>
+<a href="https://github.com/Taguar258/CLIF/releases/download/1.2/CLIF-Clean.zip">Download Template.</a>
 
 <a href="https://github.com/Taguar258/CLIF/projects/1">Project status/ToDo</a>
 
