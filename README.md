@@ -7,6 +7,8 @@ CLIF can be optimized the way you want to make your ideas work.
 
 <a href="https://github.com/Taguar258/CLIF#documentation">Download</a>
 
+_I archived this repo because I am not happy with the implementation itself, I might be reworking this in feature but not for now._
+
 ## What has been created using CLIF?
 
 <a style="color: grey" href="https://github.com/Taguar258/Raven-Storm/">Raven-Storm</a>
